@@ -63,7 +63,7 @@ function validateWeight(weightInput) {
 }
 
 // Event listener para el botón de calcular IMC
-const btn = document.getElementById('calculate');
+const btn = document.querySelector('.calculate');
 
 btn.addEventListener('click', function(){
     // Obtiene el valor de la altura y el peso
