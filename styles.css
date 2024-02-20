@@ -9,7 +9,7 @@
 
 body{
     min-height: 100vh;
-    background: url("https://digitshack.com/codepen/bmical/bg.png");
+    background: no-repeat url("https://digitshack.com/codepen/bmical/bg.png");
     background-size: cover;
     font-family: 'Nunito', sans-serif;
 }
@@ -108,12 +108,10 @@ h1{
 }
 
 .calculate:disabled {
-    background-color: #ccc; /* Cambia el color de fondo cuando está deshabilitado */
-    color: #666; /* Cambia el color del texto cuando está deshabilitado */
-    cursor: not-allowed; /* Cambia el cursor cuando está deshabilitado */
+    background-color: #ccc; 
+    color: #666; 
+    cursor: not-allowed; 
 }
-
-
 
 .result{
     padding: 30px 20px;
@@ -140,4 +138,46 @@ h1{
 #comment{
     color: #4f7df9;
     font-weight: 800;
+}
+
+.menu {
+    width: 200px;
+    background-color: rgb(255,255,255, 0.5);
+    color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    bottom: 0;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    font-family: 'Nunito', sans-serif;
+    color: #FFF;
+    background-color: #4f7df9;
+    font-size: 16px;
+    border-radius: 12px;
+    padding: 12px 0;
+    width: 50%;
+    outline: none;
+    border: none;
+    transition: background .2s ease;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.menu li a {
+    color: #000;
+    text-decoration: none;
+    
+}
+
+.menu li:hover {
+    background: #0044ff;
 }

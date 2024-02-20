@@ -47,3 +47,26 @@ btn.addEventListener('click', function(){
     document.querySelector('.comment').innerHTML = `Estás en <span id="comment">
     ${status} </span>`
 });
+
+const btnSave = document.querySelector('#save-button');
+const idField = document.querySelector('#id-person');
+
+idField.addEventListener('input', function(){
+
+    if(idField.value > 9999999 && idField.value < 9999999999){
+        btnSave.disabled = false
+    } else {
+        btnSave.disabled = true
+    }
+});
+
+
+btnSave.addEventListener('click', function(){
+    let IMC = document.querySelector("#result-number").innerHTML;
+    console.log(IMC)
+    if(IMC > 0.00){
+        alert('Puedes guardar')
+    } else {
+        alert('Primero calcula el IMC')
+    }
+});
