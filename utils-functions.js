@@ -29,21 +29,21 @@ export function agregarRegistro(usuario, imc, peso, altura, fecha) {
 }
 
 /**
- * Muestra los registros de datos (IMC, peso, altura, fecha) para un usuario específico.
- * @param {string} usuario - El identificador único del usuario cuyos registros se desean visualizar.
+ * Obtiene los registros de datos (IMC, peso, altura, fecha) para un usuario específico desde el LocalStorage.
+ * @param {string} usuario - El identificador único del usuario cuyos registros se desean obtener.
+ * @returns {Array} Un array de objetos con los registros de datos, o un array vacío
+ *  si no se encuentran registros para el usuario.
  */
-export function visualizarRegistros(usuario) {
+export function obtenerRegistros(usuario) {
     // Obtener la estructura de datos actual desde localStorage
     let datosLocalStorage = JSON.parse(localStorage.getItem('datosRegistro')) || {};
 
     // Verificar si hay registros para el usuario especificado
     if (datosLocalStorage[usuario]) {
-        // Mostrar los registros para el usuario
-        console.log(`Registros para el usuario ${usuario}:`);
-        datosLocalStorage[usuario].forEach(registro => {
-            console.log(`IMC: ${registro.imc}, Peso: ${registro.peso}, Altura: ${registro.altura}, Fecha: ${registro.fecha}`);
-        });
+        // Devolver los registros para el usuario
+        return datosLocalStorage[usuario];
     } else {
-        console.log(`No se encontraron registros para el usuario ${usuario}.`);
+        // Devolver un array vacío si no se encontraron registros para el usuario
+        return [];
     }
 }

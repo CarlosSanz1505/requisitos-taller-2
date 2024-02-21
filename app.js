@@ -1,53 +1,53 @@
 // Importar los modulos necesarios
 import { validateHeight, validateWeight } from './validate-functions.js';
-import { agregarRegistro, visualizarRegistros } from './utils-functions.js';
+import { agregarRegistro } from './utils-functions.js';
 
 // Event listener para el botón de calcular IMC
-const btn = document.querySelector('.calculate');
+const btnsCalculate = document.querySelector('.calculate');
 
-btn.addEventListener('click', function(){
-    // Obtiene el valor de la altura y el peso
-    let heightInput = document.querySelector('#height').value;
-    let weightInput = document.querySelector('#weight').value;
+btnsCalculate.addEventListener('click', function(){
+// Obtiene el valor de la altura y el peso
+let heightInput = document.querySelector('#height').value;
+let weightInput = document.querySelector('#weight').value;
 
-    // Validar la altura
-    let isValidHeight = validateHeight(heightInput);
-    if (!isValidHeight) {
-        return; // Detiene la ejecución si la altura no es válida
-    }
+// Validar la altura
+let isValidHeight = validateHeight(heightInput);
+if (!isValidHeight) {
+    return; // Detiene la ejecución si la altura no es válida
+}
 
-    // Validar el peso
-    let isValidWeight = validateWeight(weightInput);
-    if (!isValidWeight) {
-        return; // Detiene la ejecución si el peso no es válido
-    }
+// Validar el peso
+let isValidWeight = validateWeight(weightInput);
+if (!isValidWeight) {
+    return; // Detiene la ejecución si el peso no es válido
+}
 
-    // Convertir altura y peso a números
-    let height = parseFloat(heightInput);
-    let weight = parseFloat(weightInput);
-    
-    let IMC = weight / (height * height);
+// Convertir altura y peso a números
+let height = parseFloat(heightInput);
+let weight = parseFloat(weightInput);
 
-    IMC = IMC.toFixed(2);
+let IMC = weight / (height * height);
 
-    // Agrego el IMC al html para su visualización
-    document.querySelector("#result-number").innerHTML = IMC;
+IMC = IMC.toFixed(2);
 
-    // Variable para controlar el texto de salida
-    let status = '';
+// Agrego el IMC al html para su visualización
+document.querySelector("#result-number").innerHTML = IMC;
 
-    if (IMC < 18.5) {
-        status = 'bajo peso';
-    } else if (IMC >= 18.5 && IMC < 25) {
-        status = 'peso normal';
-    } else if (IMC >= 25 && IMC < 30) {
-        status = 'sobrepeso';
-    } else {
-        status = 'obesidad';
-    }
-    // Agrega el comentario al html para su visualización
-    document.querySelector('.comment').innerHTML = `Estás en <span id="comment">
-    ${status} </span>`
+// Variable para controlar el texto de salida
+let status = '';
+
+if (IMC < 18.5) {
+    status = 'bajo peso';
+} else if (IMC >= 18.5 && IMC < 25) {
+    status = 'peso normal';
+} else if (IMC >= 25 && IMC < 30) {
+    status = 'sobrepeso';
+} else {
+    status = 'obesidad';
+}
+// Agrega el comentario al html para su visualización
+document.querySelector('.comment').innerHTML = `Estás en <span id="comment">
+${status} </span>`
 });
 
 // Selecciona el botón de guardar por su ID
@@ -93,8 +93,6 @@ btnSave.addEventListener('click', function(){
         const DateSaved = localStorage.getItem('fechaActual');
         // Agrega los registros de datos al LocalStorage como estructura de datos.
         agregarRegistro(idSaved, imcSaved, weightSaved, heightSaved, DateSaved);
-        // Visualiza los registros de datos del usuario.
-        visualizarRegistros(idSaved);
         // Muestra una alerta indicando que los datos fueron guardados correctamente.
         alert('Los datos fueron guardados de manera adecuada');
     } else {
@@ -102,3 +100,4 @@ btnSave.addEventListener('click', function(){
         alert('Primero calcula el IMC');
     }
 });
+
