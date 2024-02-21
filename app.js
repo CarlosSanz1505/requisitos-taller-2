@@ -6,48 +6,52 @@ import { agregarRegistro } from './utils-functions.js';
 const btnsCalculate = document.querySelector('.calculate');
 
 btnsCalculate.addEventListener('click', function(){
-// Obtiene el valor de la altura y el peso
-let heightInput = document.querySelector('#height').value;
-let weightInput = document.querySelector('#weight').value;
+    // Obtiene el valor de la altura y el peso
+    let heightInput = document.querySelector('#height').value;
+    let weightInput = document.querySelector('#weight').value;
 
-// Validar la altura
-let isValidHeight = validateHeight(heightInput);
-if (!isValidHeight) {
-    return; // Detiene la ejecución si la altura no es válida
-}
+    // Validar la altura
+    let isValidHeight = validateHeight(heightInput);
+    if (!isValidHeight) {
+        return; // Detiene la ejecución si la altura no es válida
+    }
 
-// Validar el peso
-let isValidWeight = validateWeight(weightInput);
-if (!isValidWeight) {
-    return; // Detiene la ejecución si el peso no es válido
-}
+    // Validar el peso
+    let isValidWeight = validateWeight(weightInput);
+    if (!isValidWeight) {
+        return; // Detiene la ejecución si el peso no es válido
+    }
 
-// Convertir altura y peso a números
-let height = parseFloat(heightInput);
-let weight = parseFloat(weightInput);
+    // Convertir altura y peso a números
+    let height = parseFloat(heightInput);
+    let weight = parseFloat(weightInput);
 
-let IMC = weight / (height * height);
+    let IMC = weight / (height * height);
 
-IMC = IMC.toFixed(2);
+    IMC = IMC.toFixed(2);
 
-// Agrego el IMC al html para su visualización
-document.querySelector("#result-number").innerHTML = IMC;
+    // Agrego el IMC al html para su visualización
+    document.querySelector("#result-number").innerHTML = IMC;
 
-// Variable para controlar el texto de salida
-let status = '';
+    // Variable para controlar el texto de salida
+    let status = '';
 
-if (IMC < 18.5) {
-    status = 'bajo peso';
-} else if (IMC >= 18.5 && IMC < 25) {
-    status = 'peso normal';
-} else if (IMC >= 25 && IMC < 30) {
-    status = 'sobrepeso';
-} else {
-    status = 'obesidad';
-}
-// Agrega el comentario al html para su visualización
-document.querySelector('.comment').innerHTML = `Estás en <span id="comment">
-${status} </span>`
+    if (IMC < 18.5) {
+        status = 'bajo peso';
+    } else if (IMC >= 18.5 && IMC < 25) {
+        status = 'peso normal';
+    } else if (IMC >= 25 && IMC < 30) {
+        status = 'sobrepeso';
+    } else {
+        status = 'obesidad';
+    }
+    // Agrega la interpretación al html para su visualización
+    document.querySelector('.comment').innerHTML = `Estás en la categoría de <span id="comment">
+    ${status} </span>`
+
+    if (IMC >= 35) {
+        alert("El IMC calculado es muy alto, es posible que hayas ingresado valores incorrectos.")
+    }
 });
 
 // Selecciona el botón de guardar por su ID

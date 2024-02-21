@@ -31,7 +31,7 @@ export function validateHeight(heightInput) {
 
     // Verifica si la altura está dentro del rango permitido
     if (height <= 1.20 || height >= 2.60) {
-        alert('Por favor ingresa una altura válida.');
+        alert('Por favor ingresa una altura válida (un número entre 1.2 y 2.6).');
         return false;
     }
 
@@ -60,7 +60,7 @@ export function validateWeight(weightInput) {
 
     // Verifica que el peso sea mayor que cero
     if (weight <= 35 || weight >= 600) {
-        alert('Por favor ingrese un peso válido en kilogramos.');
+        alert('Por favor ingrese un peso válido en kilogramos (un número entre 35 y 600).');
         return false;
     }
 
