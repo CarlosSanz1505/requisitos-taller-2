@@ -1,4 +1,9 @@
 /**
+ * Módulo para validar la altura y el peso ingresados por el usuario.
+ * @module Validaciones
+ */
+
+/**
  * Valida la altura ingresada por el usuario.
  * @param {string} heightInput - El valor de altura ingresado por el usuario.
  * @returns {boolean} True si la altura es válida, de lo contrario False.

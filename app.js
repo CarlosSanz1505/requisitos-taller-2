@@ -1,5 +1,6 @@
 // Importar los modulos necesarios
 import { validateHeight, validateWeight } from './validate-functions.js';
+import { agregarRegistro, visualizarRegistros } from './utils-functions.js';
 
 // Event listener para el botón de calcular IMC
 const btn = document.querySelector('.calculate');
@@ -68,75 +69,36 @@ idField.addEventListener('input', function(){
 });
 
 /**
- * Agrega un nuevo registro de datos (IMC, peso, altura, fecha) para un usuario específico.
- * @param {string} usuario - El identificador único del usuario.
- * @param {number} imc - El índice de masa corporal (IMC) del usuario.
- * @param {number} peso - El peso del usuario en kilogramos.
- * @param {number} altura - La altura del usuario en metros.
- * @param {string} fecha - La fecha y hora en que se registraron los datos (en formato ISO 8601).
+ * Maneja el evento de clic en el botón de guardar, almacenando el IMC, altura, peso y fecha actual en el LocalStorage.
+ * @listens click
  */
-function agregarRegistro(usuario, imc, peso, altura, fecha) {
-    // Obtener la estructura de datos actual desde localStorage
-    let datosLocalStorage = JSON.parse(localStorage.getItem('datosRegistro')) || {};
-    
-    // Verificar si ya existe una entrada para el usuario
-    if (!datosLocalStorage[usuario]) {
-        // Si no existe, crear una nueva entrada para el usuario con un array vacío de registros
-        datosLocalStorage[usuario] = [];
-    }
-    
-    // Agregar el nuevo registro al array correspondiente
-    datosLocalStorage[usuario].push({ "imc": imc, "peso": peso, "altura": altura, "fecha": fecha });
-    
-    // Guardar la estructura de datos actualizada en localStorage
-    localStorage.setItem('datosRegistro', JSON.stringify(datosLocalStorage));
-}
-
-/**
- * Muestra los registros de datos (IMC, peso, altura, fecha) para un usuario específico.
- * @param {string} usuario - El identificador único del usuario cuyos registros se desean visualizar.
- */
-function visualizarRegistros(usuario) {
-    // Obtener la estructura de datos actual desde localStorage
-    let datosLocalStorage = JSON.parse(localStorage.getItem('datosRegistro')) || {};
-
-    // Verificar si hay registros para el usuario especificado
-    if (datosLocalStorage[usuario]) {
-        // Mostrar los registros para el usuario
-        console.log(`Registros para el usuario ${usuario}:`);
-        datosLocalStorage[usuario].forEach(registro => {
-            console.log(`IMC: ${registro.imc}, Peso: ${registro.peso}, Altura: ${registro.altura}, Fecha: ${registro.fecha}`);
-        });
-    } else {
-        console.log(`No se encontraron registros para el usuario ${usuario}.`);
-    }
-}
-
 btnSave.addEventListener('click', function(){
+    // Obtiene el IMC del elemento HTML.
     let IMC = document.querySelector("#result-number").innerHTML;
+    // Obtiene la fecha actual y la formatea como una cadena de texto.
     const fechaActual = (new Date()).toLocaleString();
+    // Verifica si el IMC es válido (mayor que cero).
     if(IMC > 0.00){
-        // Almacena el IMC, la altura y el peso en LocalStorage
-        // esto con el fin de guardarlos si el usuario lo desea.
+        // Almacena el IMC, la altura, el peso y la fecha en el LocalStorage.
         localStorage.setItem('IMC', IMC);
         localStorage.setItem('height', height.value);
         localStorage.setItem('weight', weight.value);
-        localStorage.setItem('IdUsuario',idField.value );
+        localStorage.setItem('IdUsuario', idField.value );
         localStorage.setItem('fechaActual', fechaActual);
-        // Obtengo los valores almacenados en el localStorage
+        // Obtiene los valores almacenados en el LocalStorage.
         const imcSaved = localStorage.getItem('IMC');
         const heightSaved = localStorage.getItem('height');
         const weightSaved = localStorage.getItem('weight');
         const idSaved = localStorage.getItem('IdUsuario');
         const DateSaved = localStorage.getItem('fechaActual');
-
-        // Lo guardamos en el local storage como estructura de datos.
-        agregarRegistro(idSaved, imcSaved,
-                         weightSaved, heightSaved, DateSaved);
-        
-        visualizarRegistros(idSaved)
-        alert('Los datos fueron guardados de manera adecuada')
+        // Agrega los registros de datos al LocalStorage como estructura de datos.
+        agregarRegistro(idSaved, imcSaved, weightSaved, heightSaved, DateSaved);
+        // Visualiza los registros de datos del usuario.
+        visualizarRegistros(idSaved);
+        // Muestra una alerta indicando que los datos fueron guardados correctamente.
+        alert('Los datos fueron guardados de manera adecuada');
     } else {
-        alert('Primero calcula el IMC')
+        // Muestra una alerta indicando que primero debe calcular el IMC.
+        alert('Primero calcula el IMC');
     }
 });
